@@ -8,7 +8,7 @@ Bash script to setup yt-dlp in termux
    > ‼⚠ PLEASE DO NOT USE PLAYSTORE THE VERSION IS OUT OF DATE 0.101 (PLAYSTORE) VS 0.118 (FDROID) ⚠‼
 2. Open termux & copy paste this :
 
-   `curl -L https://raw.githubusercontent.com/Programmer-Dr/termux-youtube-dl/v1.0.0/install.sh | bash`
+   `curl -L https://raw.githubusercontent.com/Programmer-Dr/termux-youtube-dl/master/install.sh | bash`
 
 ## How to use
 

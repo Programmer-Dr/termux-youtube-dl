@@ -13,4 +13,4 @@ Bash script to setup yt-dlp in termux
 ## How to use
 
 1. Now go into youtube (or twitter, or reddit, [full list](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md) / [raw txt](https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/supportedsites.md)), watch a video, tap the share button, then tap termux and wait for the download
-2. Go into `/storage/emulated/0/Download/youtube` with your file explorer and watch your downloaded video
+2. Go into `/storage/emulated/0/Download/[your website name]` with your file explorer and watch your downloaded video

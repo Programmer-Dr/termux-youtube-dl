@@ -20,6 +20,10 @@ sleep 2
 apt-get update
 apt-get -y install python ffmpeg
 pip install yt-dlp
+
+# Setup optional dependicies
+pip install secretstorage mutagen pycryptodomex xattr brotli brotlicffi certifi websockets
+pkg install atomicparsley phantomjs
 mkdir -p $YOUTUBEDL_OUTPUT_FOLDER
 mkdir -p $YOUTUBEDL_CONFIG_FOLDER
 mkdir -p $TERMUXURLOPENER_CONFIG_FOLDER

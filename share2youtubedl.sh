@@ -67,11 +67,15 @@ function downloadChannel() {
 
 function downloadPlaylist() {
     echo "Downloading playlist..."
-    QUALITY=$2
+    QUALITYheightMAX=$2
+    QUALITYheightMIN=$3
+    QUALITYwidthMAX=$4
+    QUALITYwidthMIN=$5
+    QUALITYtbr=$6
     if isSponsorblockAlive; then
-        yt-dlp --config-locations "${CONFIG_PATH}sponsorblock.conf" -f "bestvideo[height=?${QUALITY}]+bestaudio/bestvideo[height<=?${QUALITY}][vcodec=vp9]+bestaudio[acodec=opus]/bestvideo[height<=?${QUALITY}]+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST" "$1"
+        yt-dlp --config-locations "${CONFIG_PATH}sponsorblock.conf" -f "bestvideo[height=?${QUALITYheightMAX}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[height<=?${QUALITYheightMAX}][height>${QUALITYheightMIN}][vcodec=vp9][tbr<=${QUALITYtbr}]+bestaudio[acodec=opus]/bestvideo[height<=?${QUALITYheightMAX}][height>${QUALITYheightMIN}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[width=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[width<=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][vcodec=vp9][tbr<=${QUALITYtbr}]+bestaudio[acodec=opus]/bestvideo[width<=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][tbr<=${QUALITYtbr}]+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST" "$1"
     else
-        yt-dlp --config-locations "${CONFIG_PATH}config" -f "bestvideo[height=?${QUALITY}]+bestaudio/bestvideo[height<=?${QUALITY}][vcodec=vp9]+bestaudio[acodec=opus]/bestvideo[height<=?${QUALITY}]+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST" "$1"
+        yt-dlp --config-locations "${CONFIG_PATH}config" -f "bestvideo[height=?${QUALITYheightMAX}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[height<=?${QUALITYheightMAX}][height>${QUALITYheightMIN}][vcodec=vp9][tbr<=${QUALITYtbr}]+bestaudio[acodec=opus]/bestvideo[height<=?${QUALITYheightMAX}][height>${QUALITYheightMIN}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[width=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][tbr<=${QUALITYtbr}]+bestaudio/bestvideo[width<=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][vcodec=vp9][tbr<=${QUALITYtbr}]+bestaudio[acodec=opus]/bestvideo[width<=?${QUALITYwidthMAX}][width>${QUALITYwidthMIN}][tbr<=${QUALITYtbr}]+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST" "$1"
     fi
 
 }
@@ -116,16 +120,16 @@ if [[ "$1" =~ ^.*youtu.*$ ]] || [[ "$1" =~ ^.*youtube.*$ ]]; then
         downloadVideo "$1"
         ;;
     2)
-        downloadPlaylist "$1" 720
+        downloadPlaylist "$1" 720 680 1280 1100 900
         ;;
     3)
-        downloadPlaylist "$1" 480
+        downloadPlaylist "$1" 480 400 854 799 777
         ;;
     4)
-        downloadPlaylist "$1" 360
+        downloadPlaylist "$1" 360 300 640 599 555
         ;;
     5)
-        downloadPlaylist "$1" 240
+        downloadPlaylist "$1" 240 200 426 399 333
         ;;
     6)
         downloadChannel "$1"
@@ -175,7 +179,7 @@ elif [[ "$1" =~ ^.*nourlselected.*$ ]]; then
 
 # If shared element is NOT a youtube/SoundCloud link
 else
-    yt-dlp --config-locations "${CONFIG_PATH}config" -f "bestvideo[height<=360][vcodec=vp9]+bestaudio[acodec=opus]/bestvideo[height<=360]+bestaudio/bestvideo[height<=480]+bestaudio/bestvideo[height<=720]+bestaudio/bestvideo+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST2" "$1"
+    yt-dlp --config-locations "${CONFIG_PATH}config" -f "bestvideo[height<=?360][vcodec=vp9]+bestaudio[acodec=opus]/bestvideo[height<=?360]+bestaudio/bestvideo[height<=?480]+bestaudio/bestvideo[height<=?720]+bestaudio/bestvideo+bestaudio" -P $DOWNLOAD_PATH -o "$PLAYLIST2" "$1"
 fi
 
 read -p "Press enter to continue"
